@@ -1,10 +1,48 @@
-{
-	"folders": [
-		{
-			"path": "../pw-practice-app"
-		}
-	],
-	"settings": {
-		"typescript.tsdk": "./node_modules/typescript/lib"
-	}
-}
+import {test} from '@playwright/test'
+
+test.beforeEach( async({page}) => {
+
+    await page.goto('http://localhost:4200/')
+    await page.getByText('Forms').click()
+    await page.getByText('Forms Layouts').click()
+
+
+
+})
+
+test('Locator syntax rules', async ({page}) => {
+
+//como encntrar o localizar pelo nome da tag
+    page.locator('input')
+
+//por ID
+    page.locator('#inputEmail')
+
+//por classe 
+
+    page.locator('shape-rectangle')
+
+//por atributo 
+
+    page.locator('[placeholder="Email"]')
+
+//por classe com o valor full (cheio)
+
+    page.locator('[class="input-full-width size-medium status basic shpe-rectangle nb-transition"]')
+
+//Diferentes combinação de selector 
+                        //primeiro input       //segundo input
+    page.locator('input[placeholder="Email"] [nbinput]')
+
+//por XPath (Não recomendado!)
+
+    page.locator('//*[@id="inputEmail1"]')
+
+//por texto parcial
+    page.locator(':text("Using")')
+
+//por texto exato:
+
+    page.locator(':text-is("Using the Grid)')
+
+})
